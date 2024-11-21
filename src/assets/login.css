@@ -1,0 +1,87 @@
+/* Styling umum untuk halaman login */
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Background gradient warna cerah */
+  }
+  
+  .login-card {
+    background-color: rgba(255, 255, 255, 0.9); /* Background card semi-transparan */
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    text-align: center;
+  }
+  
+  .login-title {
+    font-size: 2rem;
+    margin-bottom: 30px;
+    color: #333;
+    font-weight: bold;
+    font-family: 'Arial', sans-serif;
+    color: #4a90e2; /* Warna biru cerah untuk judul */
+  }
+  
+  .input-group {
+    margin-bottom: 20px;
+  }
+  
+  .input-group label {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  .input-group input {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: 2px solid #ddd;
+    border-radius: 6px;
+    font-size: 1rem;
+    color: #333;
+    background-color: #f9f9f9;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .input-group input:focus {
+    border-color: #4a90e2; /* Warna biru untuk border saat fokus */
+    outline: none;
+    background-color: #fff;
+  }
+  
+  .login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2; /* Warna biru terang untuk tombol */
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-btn:hover {
+    background-color: #357ab7; /* Warna biru gelap saat hover */
+  }
+  
+  .forgot-password {
+    margin-top: 15px;
+    font-size: 0.9rem;
+    color: #888;
+  }
+  
+  .forgot-password a {
+    color: #4a90e2;
+    text-decoration: none;
+  }
+  
+  .forgot-password a:hover {
+    text-decoration: underline;
+  }
+  

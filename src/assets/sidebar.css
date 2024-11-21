@@ -1,0 +1,50 @@
+/* src/components/Sidebar.css */
+.sidebar {
+  width: 30%;
+  padding: 20px;
+  background-color: #f8f9fa;
+}
+
+.category-section, .popular-posts-section {
+  margin-bottom: 20px;
+}
+
+.category-section h3, .popular-posts-section h3 {
+  font-size: 1.2em;
+  color: #007bff;
+  border-bottom: 2px solid #eaeaea;
+  padding-bottom: 5px;
+}
+
+.category-section ul, .popular-posts-section div {
+  padding: 10px 0;
+}
+
+.category-section li {
+  list-style: none;
+  padding: 5px 0;
+  color: #007bff;
+  cursor: pointer;
+}
+
+.popular-post {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.popular-post img {
+  width: 50px;
+  height: 50px;
+  margin-right: 10px;
+}
+
+.popular-post p {
+  font-size: 0.9em;
+  color: #333;
+}
+
+.popular-post span {
+  font-size: 0.8em;
+  color: #999;
+}

@@ -1,0 +1,76 @@
+/* Styling Footer */
+.footer {
+    background-color: green; /* Warna latar footer */
+    color: white;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .footer-container {
+    display: flex;
+    justify-content: space-between;
+    font-weight: bold;
+    width: 100%;
+    max-width: 1200px;
+    margin-bottom: 20px;
+  }
+  
+  .footer-section {
+    flex: 1;
+    padding: 0 20px;
+  }
+  
+  .footer-section h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .footer-section p,
+  .footer-section a {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: white;
+    text-decoration: none;
+  }
+  
+  .footer-section a:hover {
+    color: white;
+    font-weight: bold;
+  }
+  
+  .footer-section ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .footer-section ul li {
+    margin: 10px 0;
+  }
+  
+  .footer-section .social-links {
+    display: block; /* Mengubah menjadi layout vertikal */
+  }
+  
+  .footer-section .social-links a {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1rem;
+    margin-bottom: 10px; /* Memberikan jarak antar link sosial media */
+  }
+  
+  .footer-bottom {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .footer-bottom p {
+    font-size: 0.9rem;
+    color: white;
+    font-weight: bold;
+  }
+  

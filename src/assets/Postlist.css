@@ -1,0 +1,97 @@
+/* Container utama untuk daftar post */
+.post-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px; /* Memberikan jarak antar post */
+  padding: 20px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Styling untuk setiap post */
+.post {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Shadow ringan */
+  overflow: hidden;
+  transition: transform 0.3s ease; /* Efek saat hover */
+}
+
+.post:hover {
+  transform: translateY(-10px); /* Memberikan efek naik sedikit saat hover */
+}
+
+/* Gambar post */
+.post-image img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover; /* Memastikan gambar terpotong dengan baik */
+  border-bottom: 2px solid black; /* Garis pemisah antara gambar dan konten */
+}
+
+/* Konten post */
+.post-content {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+/* Judul post */
+.post-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
+  line-height: 1.4;
+}
+
+/* Deskripsi singkat post */
+.post-description {
+  font-size: 16px;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.6;
+  text-align: justify; /* Menyusun teks agar lebih mudah dibaca */
+}
+
+/* Tombol Read More */
+.read-more {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s ease;
+}
+
+.read-more:hover {
+  background-color: #218838; /* Warna hijau gelap saat hover */
+}
+
+/* Footer post */
+.post-footer {
+  font-size: 14px;
+  color: #888;
+  padding: 10px;
+  background-color: #f9f9f9;
+  text-align: right;
+  border-top: 1px solid black; /* Garis pemisah di footer */
+}
+
+/* Responsif untuk post list */
+@media (max-width: 768px) {
+  .post-list {
+    width: 100%; /* Supaya post list memenuhi layar kecil */
+  }
+
+  .sidebar {
+    display: none; /* Sembunyikan sidebar pada layar kecil */
+  }
+}
+
