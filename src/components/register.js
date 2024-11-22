@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Register = () => {
   axios.defaults.withCredentials = true; ///
-  const [email, setEmail] = useState("");
+  const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -17,14 +17,14 @@ const Register = () => {
     setIsLoading(true);
 
     // Validasi input
-    if (!email || !password) {
-      setError("Email dan password harus diisi");
+    if (!username || !password) {
+      setError("Username dan password harus diisi");
       setIsLoading(false);
       return;
     }
 
     const values = {
-      email: email,
+      username: username,
       password: password,
     };
 
@@ -47,13 +47,13 @@ const Register = () => {
       <h2>Daftar Akun Baru</h2>
       <form onSubmit={handleRegister} className="register-form">
         <div className="form-group">
-          <label htmlFor="email">Email</label>
+          <label htmlFor="username">Username</label>
           <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            placeholder="Email Anda"
+            type="username"
+            id="username"
+            value={username}
+            onChange={(e) => setUsername(e.target.value)}
+            placeholder="Username Anda"
             required
           />
         </div>
