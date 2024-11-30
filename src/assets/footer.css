@@ -73,4 +73,23 @@
     color: white;
     font-weight: bold;
   }
+
+  /* Tambahkan ke Footer.css dan Header.css */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    padding: 20px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .footer-content {
+    flex-direction: column;
+  }
+}
+
   
+

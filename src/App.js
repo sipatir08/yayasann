@@ -7,13 +7,14 @@ import Stats from "./components/stats";
 import PostList from "./components/postlist";
 import Login from "./components/login";
 import Register from "./components/register"; // Halaman Register
+import Donation from "./components/donation";
+import PrivateRoute from "./components/privateRoute"; // Import PrivateRoute baru
 import "./App.css";
 
 function App() {
   return (
     <Router>
       <div className="App">
-        {/* Rute login dan register tidak akan menampilkan Header, Sidebar, atau Stats */}
         <Routes>
           {/* Route untuk halaman login */}
           <Route path="/login" element={<Login />} />
@@ -21,6 +22,22 @@ function App() {
           {/* Route untuk halaman register */}
           <Route path="/register" element={<Register />} />
           
+          {/* Route untuk halaman donasi (diproteksi) */}
+          <Route 
+            path="/donate" 
+            element={
+              <PrivateRoute>
+                <>
+                  <Header />
+                  <div className="content">
+                    <Donation />
+                  </div>
+                  <Footer />
+                </>
+              </PrivateRoute>
+            } 
+          />
+
           {/* Route untuk halaman utama (Home) */}
           <Route
             path="/"

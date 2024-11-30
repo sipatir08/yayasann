@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"; // Import useNavigate
 import "../assets/login.css"; // Pastikan file CSS ini sudah ada
 
 const Login = () => {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState(""); // Untuk menyimpan pesan error
   const navigate = useNavigate(); // Inisialisasi useNavigate
@@ -13,12 +13,12 @@ const Login = () => {
 
     // Kirim permintaan POST ke backend untuk login
     try {
-      const response = await fetch("http://localhost:8082/login", {
+      const response = await fetch("http://localhost:8080/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ username, password }), // Mengirim data ke backend
+        body: JSON.stringify({ email, password }), // Mengirim data ke backend
       });
 
       const data = await response.json();
@@ -29,11 +29,11 @@ const Login = () => {
         navigate("/"); // Arahkan ke halaman utama atau dashboard
       } else {
         // Tampilkan pesan error jika login gagal
-        setError(data.message || "Username atau password salah");
+        setError(data.message || "Email atau password salah");
       }
     } catch (error) {
       console.error("Error during login:", error);
-      setError("Username atau password salah");
+      setError("Email atau password salah");
     }
   };
 
@@ -43,15 +43,15 @@ const Login = () => {
         <h2 className="login-title">Login</h2>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
-            <label htmlFor="username">Username</label>
+            <label htmlFor="email">Email</label>
             <input
               type="text"
-              id="username"
-              name="username"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
               required
-              placeholder="Enter your username"
+              placeholder="Enter your email"
             />
           </div>
           <div className="input-group">

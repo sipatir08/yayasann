@@ -35,3 +35,16 @@
     padding: 10px;
   }
 }
+
+/* Animasi untuk konten */
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1.5s forwards;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+

@@ -1,11 +1,9 @@
 import React from 'react';
-// import { Link } from "react-router-dom";
+import { Link } from "react-router-dom"; // Gunakan Link untuk navigasi internal
 import '../assets/Header.css';
-import logo from '../assets/images/logoril.png'; // Ganti dengan path logo Anda
+import logo from '../assets/images/logoril.png'; // Path logo Anda
 
 function Header() {
-
-  
   return (
     <>
       {/* Navbar */}
@@ -15,16 +13,17 @@ function Header() {
           <span className="logo-text">YAYASAN TAQWA AL-QOLBI</span>
         </div>
         <div className="nav-links">
-          <a href="/">Home</a>
-          <a href="/login">Masuk</a>
-          <a href="/register">Register</a>
+          <Link to="/">Home</Link>            {/* Gunakan Link untuk navigasi */}
+          <Link to="/donate">Donasi</Link>    {/* Tambahkan navigasi donasi */}
+          <Link to="/login">Masuk</Link>
+          <Link to="/register">Register</Link>
         </div>
       </nav>
 
       {/* Header dengan Background */}
       <header className="header">
         <div className="header-content">
-          {/* Anda bisa menambahkan konten lainnya di sini */}
+          {/* Konten tambahan jika diperlukan */}
         </div>
       </header>
     </>

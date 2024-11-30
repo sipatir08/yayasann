@@ -5,7 +5,7 @@ import axios from "axios";
 
 const Register = () => {
   axios.defaults.withCredentials = true; ///
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -17,19 +17,19 @@ const Register = () => {
     setIsLoading(true);
 
     // Validasi input
-    if (!username || !password) {
-      setError("Username dan password harus diisi");
+    if (!email || !password) {
+      setError("Email dan password harus diisi");
       setIsLoading(false);
       return;
     }
 
     const values = {
-      username: username,
+      email: email,
       password: password,
     };
 
     try {
-      const response = await axios.post("http://localhost:8082/register", values, {
+      const response = await axios.post("http://localhost:8080/register", values, {
         withCredentials: true,
       });
       console.log(response.data);
@@ -47,13 +47,13 @@ const Register = () => {
       <h2>Daftar Akun Baru</h2>
       <form onSubmit={handleRegister} className="register-form">
         <div className="form-group">
-          <label htmlFor="username">Username</label>
+          <label htmlFor="email">Email</label>
           <input
-            type="username"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            placeholder="Username Anda"
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            placeholder="Email Anda"
             required
           />
         </div>

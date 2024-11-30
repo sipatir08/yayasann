@@ -1,0 +1,38 @@
+.donation-container {
+    text-align: center;
+    background-color: #f9f9f9;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 2rem auto;
+  }
+  
+  .donation-title {
+    font-size: 1.8rem;
+    color: #333;
+    margin-bottom: 1rem;
+  }
+  
+  .donation-text {
+    font-size: 1rem;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+  
+  .qr-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .qr-image {
+    width: 200px;
+    height: 200px;
+  }
+  
+  .thank-you-note {
+    font-size: 1rem;
+    color: #444;
+  }
+  
