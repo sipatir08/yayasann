@@ -21,6 +21,8 @@ function App() {
           
           {/* Route untuk halaman register */}
           <Route path="/register" element={<Register />} />
+
+          {/* Route untuk halaman dashboard */}
           
           {/* Route untuk halaman donasi (diproteksi) */}
           <Route 

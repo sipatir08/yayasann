@@ -6,6 +6,7 @@ import axios from "axios";
 const Register = () => {
   axios.defaults.withCredentials = true; ///
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -25,11 +26,12 @@ const Register = () => {
 
     const values = {
       email: email,
+      name: name,
       password: password,
     };
 
     try {
-      const response = await axios.post("http://localhost:8080/register", values, {
+      const response = await axios.post("http://localhost:8080/regis", values, {
         withCredentials: true,
       });
       console.log(response.data);
@@ -54,6 +56,17 @@ const Register = () => {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Email Anda"
+            required
+          />
+        </div>
+        <div className="form-group">
+          <label htmlFor="name">Nama</label>
+          <input
+            type="name"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            placeholder="Nama Anda"
             required
           />
         </div>

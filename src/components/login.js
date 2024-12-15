@@ -26,7 +26,12 @@ const Login = () => {
       if (response.ok) {
         // Jika login berhasil, simpan token dan arahkan ke halaman utama
         localStorage.setItem("token", data.token); // Menyimpan token di localStorage
-        navigate("/"); // Arahkan ke halaman utama atau dashboard
+
+        if (data.user.role === "admin") {
+          window.location.href = "https://sipatir08.github.io/dashboard/" // Arahkan ke halaman utama atau dashboard
+        } else if (data.user.role === "donatur") {
+          navigate("/") // Arahkan ke halaman utama atau dashboard
+        }
       } else {
         // Tampilkan pesan error jika login gagal
         setError(data.message || "Email atau password salah");

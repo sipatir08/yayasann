@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Donatur</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <script defer src="admin.js"></script>
+</head>
+<body class="bg-gray-100">
+    <!-- Sidebar -->
+    <div class="flex h-screen">
+        <aside class="bg-yellow-500 w-64 p-4">
+            <h1 class="text-white text-2xl font-bold mb-6">Admin Dashboard</h1>
+            <nav>
+                <ul>
+                    <li class="mb-4"><a href="Dashboardadmin.html" class="text-white hover:text-gray-200">Dashboard</a></li>
+                    <li class="mb-4"><a href="Kelolauser.html" class="text-white hover:text-gray-200">Kelola User</a></li>
+                    <li class="mb-4"><a href="Keloladonasi.html" class="text-white hover:text-gray-200">Kelola Donasi</a></li>
+                    <li class="mb-4"><a href="Donatur.html" class="text-white hover:text-gray-200">Donatur</a></li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="flex-1 p-6">
+            <!-- Donatur Section -->
+            <section id="donatur">
+                <h2 class="text-2xl font-bold mb-6">Daftar Donatur</h2>
+                <div class="bg-white p-4 rounded shadow">
+                    <h3 class="text-lg font-semibold mb-4">Daftar Donatur</h3>
+                    <table class="min-w-full bg-white">
+                        <thead>
+                            <tr>
+                                <th class="py-2">ID</th>
+                                <th class="py-2">Nama</th>
+                                <th class="py-2">Email</th>
+                                <th class="py-2">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody id="donatur-table-body">
+                            <!-- Contoh data donatur -->
+                            <tr>
+                                <td class="py-2">1</td>
+                                <td class="py-2">John Doe</td>
+                                <td class="py-2">john@example.com</td>
+                                <td class="py-2">
+                                    <button class="bg-blue-500 text-white px-4 py-2 rounded" onclick="editDonatur(this)">Edit</button>
+                                    <button class="bg-red-500 text-white px-4 py-2 rounded" onclick="deleteDonatur(this)">Hapus</button>
+                                </td>
+                            </tr>
+                            <!-- Tambahkan data donatur lainnya di sini -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        function editDonatur(button) {
+            const row = button.parentElement.parentElement;
+            const cells = row.getElementsByTagName('td');
+            const id = cells[0].innerText;
+            const name = cells[1].innerText;
+            const email = cells[2].innerText;
+
+            const newName = prompt("Edit Nama:", name);
+            const newEmail = prompt("Edit Email:", email);
+
+            if (newName !== null && newEmail !== null) {
+                cells[1].innerText = newName;
+                cells[2].innerText = newEmail;
+                // Tambahkan logika untuk menyimpan perubahan ke server di sini
+            }
+        }
+
+        function deleteDonatur(button) {
+            const row = button.parentElement.parentElement;
+            const id = row.getElementsByTagName('td')[0].innerText;
+
+            if (confirm(`Apakah Anda yakin ingin menghapus donatur dengan ID ${id}?`)) {
+                row.remove();
+                // Tambahkan logika untuk menghapus donatur dari server di sini
+            }
+        }
+    </script>
+</body>
+</html>
