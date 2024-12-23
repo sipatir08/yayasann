@@ -6,9 +6,9 @@ import Sidebar from "./components/sidebar";
 import Stats from "./components/stats";
 import PostList from "./components/postlist";
 import Login from "./components/login";
-import Register from "./components/register"; // Halaman Register
-import Donation from "./components/donation";
-import PrivateRoute from "./components/privateRoute"; // Import PrivateRoute baru
+import Register from "./components/register";
+import Donation from "./components/donation"; // Halaman Donasi tanpa proteksi PrivateRoute
+// import PrivateRoute from "./components/privateRoute"; 
 import "./App.css";
 
 function App() {
@@ -18,26 +18,22 @@ function App() {
         <Routes>
           {/* Route untuk halaman login */}
           <Route path="/login" element={<Login />} />
-          
+
           {/* Route untuk halaman register */}
           <Route path="/register" element={<Register />} />
 
-          {/* Route untuk halaman dashboard */}
-          
-          {/* Route untuk halaman donasi (diproteksi) */}
-          <Route 
-            path="/donate" 
+          {/* Route untuk halaman donasi tanpa proteksi di route */}
+          <Route
+            path="/donate"
             element={
-              <PrivateRoute>
-                <>
-                  <Header />
-                  <div className="content">
-                    <Donation />
-                  </div>
-                  <Footer />
-                </>
-              </PrivateRoute>
-            } 
+              <>
+                <Header />
+                <div className="content">
+                  <Donation />
+                </div>
+                <Footer />
+              </>
+            }
           />
 
           {/* Route untuk halaman utama (Home) */}
