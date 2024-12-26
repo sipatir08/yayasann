@@ -1,95 +1,119 @@
-/* Styling Footer */
 .footer {
-    background-color: green; /* Warna latar footer */
-    color: white;
-    padding: 40px 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .footer-container {
-    display: flex;
-    justify-content: space-between;
-    font-weight: bold;
-    width: 100%;
-    max-width: 1200px;
-    margin-bottom: 20px;
-  }
-  
-  .footer-section {
-    flex: 1;
-    padding: 0 20px;
-  }
-  
-  .footer-section h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    margin-bottom: 10px;
-  }
-  
-  .footer-section p,
-  .footer-section a {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: white;
-    text-decoration: none;
-  }
-  
-  .footer-section a:hover {
-    color: white;
-    font-weight: bold;
-  }
-  
-  .footer-section ul {
-    list-style-type: none;
-    padding: 0;
-  }
-  
-  .footer-section ul li {
-    margin: 10px 0;
-  }
-  
-  .footer-section .social-links {
-    display: block; /* Mengubah menjadi layout vertikal */
-  }
-  
-  .footer-section .social-links a {
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1rem;
-    margin-bottom: 10px; /* Memberikan jarak antar link sosial media */
-  }
-  
-  .footer-bottom {
-    text-align: center;
-    margin-top: 20px;
-  }
-  
-  .footer-bottom p {
-    font-size: 0.9rem;
-    color: white;
-    font-weight: bold;
-  }
+  background-color: #2c3e50; /* Warna latar modern yang lebih gelap */
+  color: #ecf0f1; /* Teks warna terang untuk kontras */
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* Tambahkan jarak antar elemen */
+}
 
-  /* Tambahkan ke Footer.css dan Header.css */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 1200px;
+  gap: 30px; /* Jarak antar kolom */
+}
+
+.footer-section {
+  flex: 1;
+  padding: 0 20px;
+}
+
+.footer-section h3 {
+  font-size: 1.5rem; /* Sedikit lebih besar */
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: #1abc9c; /* Warna hijau segar */
+  border-bottom: 2px solid #1abc9c; /* Tambahkan garis bawah untuk estetika */
+  padding-bottom: 5px;
+}
+
+.footer-section p,
+.footer-section a {
+  font-size: 0.95rem;
+  font-weight: 400;
+  color: #bdc3c7; /* Warna teks yang sedikit lebih redup */
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-section a:hover {
+  color: #1abc9c; /* Warna hijau saat hover */
+  font-weight: 500;
+}
+
+.footer-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-section ul li {
+  margin: 10px 0;
+}
+
+.footer-section .social-links {
+  display: flex; /* Ubah menjadi horizontal */
+  gap: 15px; /* Jarak antar ikon sosial */
+}
+
+.footer-section .social-links a {
+  color: #ecf0f1;
+  font-size: 1.2rem; /* Sedikit lebih besar untuk ikon */
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.footer-section .social-links a:hover {
+  color: #1abc9c;
+  transform: scale(1.1); /* Zoom in saat hover */
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.footer-bottom p {
+  font-size: 0.9rem;
+  color: #bdc3c7;
+  font-weight: 400;
+}
+
+/* Responsivitas */
 @media (max-width: 768px) {
-  .navbar {
+  .footer-container {
     flex-direction: column;
-    padding: 20px;
+    align-items: center;
+    gap: 20px; /* Tambahkan jarak antar elemen */
   }
 
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
+  .footer-section {
+    text-align: center; /* Rata tengah untuk konten */
+    padding: 10px 0;
   }
 
-  .footer-content {
-    flex-direction: column;
+  .footer-section .social-links {
+    justify-content: center;
   }
 }
 
-  
+@media (max-width: 480px) {
+  .footer {
+    padding: 30px 15px;
+  }
 
+  .footer-section h3 {
+    font-size: 1.3rem;
+  }
+
+  .footer-section p,
+  .footer-section a {
+    font-size: 0.85rem;
+  }
+
+  .footer-section .social-links a {
+    font-size: 1rem;
+  }
+}

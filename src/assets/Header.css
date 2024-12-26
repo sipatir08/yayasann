@@ -1,6 +1,6 @@
 /* Navbar */
 .navbar {
-  background-color: yellow; /* Warna kuning lebih lembut */
+  background-color: #27ae60; /* Mengganti dengan warna hijau lebih gelap yang cocok dengan footer */
   padding: 15px 50px;
   padding-left: 15px;
   display: flex;
@@ -19,7 +19,7 @@
 }
 
 .navbar:hover {
-  background-color: yellowgreen; /* Warna berubah saat navbar dihover */
+  background-color: #2ecc71; /* Warna lebih terang saat navbar dihover */
 }
 
 /* Logo dan Teks */
@@ -38,7 +38,7 @@
 .logo-text {
   font-size: 1.8rem;
   font-weight: 700; /* Menebalkan teks lebih */
-  color: #008000; /* Menggunakan warna hijau */
+  color: white; /* Menggunakan warna putih agar kontras dengan warna navbar */
   letter-spacing: 2px; /* Memberikan spasi antar huruf */
   text-transform: uppercase; /* Membuat teks kapital semua */
 }
@@ -51,7 +51,7 @@
 }
 
 .nav-links a {
-  color: #008000; /* Warna hijau untuk link */
+  color: white; /* Mengubah warna link menjadi putih agar kontras */
   text-decoration: none;
   font-size: 1.1rem; /* Ukuran font sedikit lebih besar */
   padding: 10px 20px;
@@ -62,7 +62,7 @@
 
 .nav-links a:hover {
   background-color: rgba(255, 255, 255, 0.3);
-  color: yellowgreen; /* Warna merah saat hover */
+  color: #27ae60; /* Mengubah warna menjadi hijau gelap saat hover */
   transform: scale(1.1); /* Efek zoom saat hover */
 }
 

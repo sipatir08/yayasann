@@ -133,7 +133,6 @@ const Donation = () => {
             <option value="Education">Education</option>
             <option value="Health">Health</option>
             <option value="Food Assistance">Food Assistance</option>
-            <option value="Shelter">Shelter</option>
           </select>
         </div>
 

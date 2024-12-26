@@ -1,20 +1,63 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../assets/Postlist.css";
 
 const PostList = () => {
   // State untuk kontrol deskripsi apakah panjang atau pendek
   const [isExpanded, setIsExpanded] = useState(false);
 
-  // Fungsi untuk toggle state
+  // State untuk indeks gambar
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Array foto untuk slideshow
+  const images = [
+    require("../assets/images/acara.jpg"),
+    require("../assets/images/acara2.jpg"),
+  ];
+
+  // Fungsi untuk toggle deskripsi
   const toggleDescription = () => {
     setIsExpanded(!isExpanded);
   };
+
+  // Fungsi untuk manual control
+  const handleNext = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === images.length - 1 ? 0 : prevIndex + 1
+    );
+  };
+
+  const handlePrevious = () => {
+    setCurrentImageIndex((prevIndex) =>
+      prevIndex === 0 ? images.length - 1 : prevIndex - 1
+    );
+  };
+
+  // useEffect untuk mengganti gambar secara otomatis setiap beberapa detik
+  useEffect(() => {
+    const interval = setInterval(() => {
+      handleNext();
+    }, 3000); // Ganti gambar setiap 3 detik
+
+    // Membersihkan interval saat komponen unmount
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <div className="post-list">
       <div className="post">
         <div className="post-image">
-          <img src={require("../assets/images/acara.jpg")} alt="Post Thumbnail" />
+          <img
+            src={images[currentImageIndex]}
+            alt={`Post Thumbnail ${currentImageIndex + 1}`}
+          />
+          <div className="controls">
+            <button onClick={handlePrevious} className="prev-button">
+              ← Previous
+            </button>
+            <button onClick={handleNext} className="next-button">
+              Next →
+            </button>
+          </div>
         </div>
         <div className="post-content">
           <h2 className="post-title">Berita Acara Terbaru</h2>
@@ -29,7 +72,6 @@ const PostList = () => {
         </div>
         <p className="post-footer">Acara Tanggal Sekian-sekian</p>
       </div>
-      {/* Tambahkan lebih banyak post jika perlu */}
     </div>
   );
 };

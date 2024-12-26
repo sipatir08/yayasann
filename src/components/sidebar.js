@@ -6,12 +6,11 @@ const Sidebar = () => {
   return (
     <div className="sidebar">
       <div className="category-section">
-        <h3>Kategori</h3>
+        <h3>Detail Donation</h3>
         <ul>
-          <li>Panti Asuhan</li>
-          <li>Dinas Sosial</li>
-          <li>Pendidikan</li>
-          <li>Kesehatan</li>
+          <li>Education</li>
+          <li>Health</li>
+          <li>Food Assistance</li>
         </ul>
       </div>
       <div className="popular-posts-section">
@@ -21,7 +20,18 @@ const Sidebar = () => {
           <p>Lorem ipsum dolor sit amet</p>
           <span>By Jhon Doe</span>
         </div>
-        {/* Tambahkan lebih banyak popular post jika perlu */}
+
+        <div className="popular-post">
+          <img src="https://via.placeholder.com/150x90" alt="Popular Post" />
+          <p>Lorem ipsum dolor sit amet</p>
+          <span>By Jhon Doe</span>
+        </div>
+
+        <div className="popular-post">
+          <img src="https://via.placeholder.com/150x90" alt="Popular Post" />
+          <p>Lorem ipsum dolor sit amet</p>
+          <span>By Jhon Doe</span>
+        </div>
       </div>
     </div>
   );
