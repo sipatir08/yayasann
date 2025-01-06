@@ -4,7 +4,7 @@ import "../assets/donation.css";
 
 const Donation = () => {
   const [name, setName] = useState("");
-  const [donationType, setDonationType] = useState("money");
+  const [donationType, setDonationType] = useState("");
   const [amount, setAmount] = useState("");
   const [item, setItem] = useState("");
   const [category, setCategory] = useState("");
@@ -12,7 +12,7 @@ const Donation = () => {
   // Fungsi cek login
   const isLoggedIn = () => !!localStorage.getItem("token");
 
-  const handleDonate = () => {
+  const handleDonate = async () => {
     // Cek apakah user sudah login
     if (!isLoggedIn()) {
       Swal.fire({
@@ -25,7 +25,12 @@ const Donation = () => {
     }
 
     // Validasi form
-    if (!name || !category || (donationType === "money" && !amount) || (donationType === "goods" && !item)) {
+    if (
+      !name ||
+      !category ||
+      (donationType === "uang" && !amount) ||
+      (donationType === "barang" && !item)
+    ) {
       Swal.fire({
         icon: "error",
         title: "Incomplete Data",
@@ -35,18 +40,54 @@ const Donation = () => {
       return;
     }
 
-    // Success Alert
-    if (donationType === "money") {
-      Swal.fire({
-        icon: "success",
-        title: "Thank You!",
-        text: `Terima kasih, ${name}, telah berdonasi sebesar Rp${amount} untuk kategori ${category}.`,
+    // Data yang akan dikirim ke backend
+    const donationData = {
+      nama_donatur: name,
+      kategori: category,
+      jumlah: parseInt(amount), // Konversi jumlah ke angka
+      type: donationType,
+    };
+
+    console.log(donationData);
+    console.log(localStorage.getItem("token"));
+    const token = localStorage.getItem("token"); // Ambil token yang sudah disimpan di local storage
+    
+
+    try {
+      const response = await fetch('http://localhost:8080/donations', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
+        body: JSON.stringify(donationData),
       });
-    } else {
+
+      const data = await response.json();
+      console.log(data);
+      
+
+      if (response.ok) {
+        Swal.fire({
+          icon: "success",
+          title: "Thank You!",
+          text: `Terima kasih, ${name}, telah berdonasi sebesar Rp${amount} untuk kategori ${category}.`,
+        });
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Error",
+          text: data.message || "Terjadi kesalahan saat mengirim donasi.",
+          confirmButtonText: "OK",
+        });
+      }
+    } catch (error) {
+      console.log("Error:", error);
       Swal.fire({
-        icon: "success",
-        title: "Thank You!",
-        text: `Terima kasih, ${name}, telah berdonasi barang "${item}" untuk kategori ${category}.`,
+        icon: "error",
+        title: "Error",
+        text: "Gagal mengirim donasi. Silakan coba lagi.",
+        confirmButtonText: "OK",
       });
     }
   };
@@ -54,7 +95,9 @@ const Donation = () => {
   return (
     <div className="donation-container">
       <h2 className="donation-title">Make a Donation</h2>
-      <p className="donation-text">Your contribution makes a difference. Thank you for your generosity!</p>
+      <p className="donation-text">
+        Your contribution makes a difference. Thank you for your generosity!
+      </p>
 
       <div className="donation-form">
         {/* Input Nama */}
@@ -76,18 +119,18 @@ const Donation = () => {
             <label>
               <input
                 type="radio"
-                value="money"
-                checked={donationType === "money"}
-                onChange={() => setDonationType("money")}
+                value="uang"
+                checked={donationType === "uang"}
+                onChange={() => setDonationType("uang")}
               />
               Uang
             </label>
             <label>
               <input
                 type="radio"
-                value="goods"
-                checked={donationType === "goods"}
-                onChange={() => setDonationType("goods")}
+                value="barang"
+                checked={donationType === "barang"}
+                onChange={() => setDonationType("barang")}
               />
               Barang
             </label>
@@ -95,7 +138,7 @@ const Donation = () => {
         </div>
 
         {/* Input Dinamis Berdasarkan Pilihan */}
-        {donationType === "money" && (
+        {donationType === "uang" && (
           <div className="form-group">
             <label htmlFor="amount">Donation Amount</label>
             <input
@@ -108,7 +151,7 @@ const Donation = () => {
           </div>
         )}
 
-        {donationType === "goods" && (
+        {donationType === "barang" && (
           <div className="form-group">
             <label htmlFor="item">Item to Donate</label>
             <input
@@ -117,6 +160,13 @@ const Donation = () => {
               placeholder="Enter Item Name"
               value={item}
               onChange={(e) => setItem(e.target.value)}
+            />
+            <input
+              type="text"
+              id="amount"
+              placeholder="Enter amount Name"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
             />
           </div>
         )}
@@ -129,10 +179,12 @@ const Donation = () => {
             value={category}
             onChange={(e) => setCategory(e.target.value)}
           >
-            <option value="" disabled>Select Category</option>
+            <option value="" disabled>
+              Select Category
+            </option>
             <option value="Education">Education</option>
             <option value="Health">Health</option>
-            <option value="Food Assistance">Food Assistance</option>
+            <option value="FoodAssistance">Food Assistance</option>
           </select>
         </div>
 

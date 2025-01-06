@@ -1,87 +1,111 @@
 /* Styling umum untuk halaman login */
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif; /* Font modern dan lembut */
+  background: linear-gradient(to right, #f9f9f9, #e3fdfd); /* Warna pastel lembut */
+  color: #333;
+}
+
+.logo {
+  display: block;
+  margin: 0 auto 20px; /* Posisikan logo di tengah dengan margin bawah */
+  width: 50px; /* Ukuran logo */
+}
+
+.tagline {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .login-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background: linear-gradient(to right, #ff7e5f, #feb47b); /* Background gradient warna cerah */
-  }
+  display: flex;
+  justify-content: center; /* Posisikan secara horizontal */
+  align-items: center; /* Posisikan secara vertikal */
+  min-height: 100vh; /* Buat kontainer memenuhi tinggi layar */
+}
+
+.login-card {
+  background-color: #ffffff; /* Background putih bersih */
+  padding: 30px 25px;
+  border-radius: 20px; /* Sudut lebih membulat untuk kesan lembut */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Shadow halus */
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+}
+
+.login-title {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #4a4a4a; /* Warna abu-abu lembut */
+  margin-bottom: 20px;
   
-  .login-card {
-    background-color: rgba(255, 255, 255, 0.9); /* Background card semi-transparan */
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    width: 100%;
-    max-width: 400px;
-    text-align: center;
-  }
-  
-  .login-title {
-    font-size: 2rem;
-    margin-bottom: 30px;
-    color: #333;
-    font-weight: bold;
-    font-family: 'Arial', sans-serif;
-    color: #4a90e2; /* Warna biru cerah untuk judul */
-  }
-  
-  .input-group {
-    margin-bottom: 20px;
-  }
-  
-  .input-group label {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 5px;
-  }
-  
-  .input-group input {
-    width: 100%;
-    padding: 12px;
-    margin-top: 8px;
-    border: 2px solid #ddd;
-    border-radius: 6px;
-    font-size: 1rem;
-    color: #333;
-    background-color: #f9f9f9;
-    transition: all 0.3s ease-in-out;
-  }
-  
-  .input-group input:focus {
-    border-color: #4a90e2; /* Warna biru untuk border saat fokus */
-    outline: none;
-    background-color: #fff;
-  }
-  
-  .login-btn {
-    width: 100%;
-    padding: 12px;
-    background-color: #4a90e2; /* Warna biru terang untuk tombol */
-    color: white;
-    border: none;
-    border-radius: 6px;
-    font-size: 1.2rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-  }
-  
-  .login-btn:hover {
-    background-color: #357ab7; /* Warna biru gelap saat hover */
-  }
-  
-  .forgot-password {
-    margin-top: 15px;
-    font-size: 0.9rem;
-    color: #888;
-  }
-  
-  .forgot-password a {
-    color: #4a90e2;
-    text-decoration: none;
-  }
-  
-  .forgot-password a:hover {
-    text-decoration: underline;
-  }
-  
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 1rem;
+  color: #666; /* Warna abu-abu lembut untuk teks label */
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  font-size: 1rem;
+  background-color: #f8f8f8; /* Background input lebih terang */
+  color: #333;
+  transition: all 0.3s ease-in-out;
+}
+
+.input-group input:focus {
+  border-color: #a0eac9; /* Warna hijau pastel */
+  outline: none;
+  background-color: #ffffff;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(to right, #a0eac9, #86c9d4); /* Gradient warna pastel hijau & biru */
+  color: white;
+  border: none;
+  border-radius: 25px; /* Tombol membulat untuk kesan lembut */
+  font-size: 1.1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.login-btn:hover {
+  background: linear-gradient(to right, #86c9d4, #a0eac9); /* Transisi lembut */
+}
+
+.error-message {
+  color: #e57373; /* Warna merah muda lembut */
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.register-redirect {
+  margin-top: 15px;
+  font-size: 0.9rem;
+  color: #666;
+}
+
+.register-redirect a {
+  color: #86c9d4; /* Warna biru pastel */
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.register-redirect a:hover {
+  text-decoration: underline;
+}

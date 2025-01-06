@@ -1,39 +1,34 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate
-import "../assets/login.css"; // Pastikan file CSS ini sudah ada
+import { useNavigate } from "react-router-dom";
+import "../assets/login.css";
+import logo from '../assets/images/logoril.png'; // Path logo Anda
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(""); // Untuk menyimpan pesan error
-  const navigate = useNavigate(); // Inisialisasi useNavigate
+  const [error, setError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Kirim permintaan POST ke backend untuk login
     try {
       const response = await fetch("http://localhost:8080/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ email, password }), // Mengirim data ke backend
+        body: JSON.stringify({ email, password }),
       });
 
       const data = await response.json();
 
       if (response.ok) {
-        // Jika login berhasil, simpan token dan arahkan ke halaman utama
-        localStorage.setItem("token", data.token); // Menyimpan token di localStorage
-
-        if (data.user.role === "admin") {
-          window.location.href = "https://sipatir08.github.io/dashboard/" // Arahkan ke halaman utama atau dashboard
-        } else if (data.user.role === "donatur") {
-          navigate("/") // Arahkan ke halaman utama atau dashboard
-        }
+        localStorage.setItem("token", data.token);
+        data.user.role === "admin"
+          ? window.location.href =
+              "http://127.0.0.1:5502/src/dashboard/Dashboardadmin.html"
+          : navigate("/");
       } else {
-        // Tampilkan pesan error jika login gagal
         setError(data.message || "Email atau password salah");
       }
     } catch (error) {
@@ -45,7 +40,9 @@ const Login = () => {
   return (
     <div className="login-container">
       <div className="login-card">
+      <img src={logo} alt="Logo" className="logo" />
         <h2 className="login-title">Login</h2>
+        <p className="tagline">Welcome back! Please login to continue.</p>
         <form onSubmit={handleSubmit}>
           <div className="input-group">
             <label htmlFor="email">Email</label>
@@ -71,11 +68,9 @@ const Login = () => {
               placeholder="Enter your password"
             />
           </div>
-          {error && <p className="error-message">{error}</p>} {/* Tampilkan pesan error */}
+          {error && <p className="error-message">{error}</p>}
           <button type="submit" className="login-btn">Login</button>
         </form>
-
-        {/* Link ke halaman Register */}
         <p className="register-redirect">
           Don't have an account? <a href="/register">Register here</a>
         </p>

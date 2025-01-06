@@ -108,6 +108,25 @@
   letter-spacing: 2px;
 }
 
+.logout-button {
+  background-color: rgba(255, 255, 255, 0.3); /* Warna transparan seperti link navigasi */
+  color: white; /* Warna teks putih agar kontras */
+  border: none;
+  padding: 10px 20px; /* Sama seperti link navigasi */
+  border-radius: 5px;
+  font-size: 1.1rem; /* Ukuran font sama dengan link navigasi */
+  font-weight: bold; /* Sama seperti link navigasi */
+  transition: background 0.3s ease, color 0.3s ease; /* Efek transisi */
+  cursor: pointer;
+}
+
+.logout-button:hover {
+  background-color: white; /* Sama seperti hover link navigasi */
+  color: #27ae60; /* Warna hijau gelap saat hover */
+  transform: scale(1.1); /* Efek zoom sama seperti link navigasi */
+}
+
+
 /* Tambahkan ke Footer.css dan Header.css */
 @media (max-width: 768px) {
   .navbar {

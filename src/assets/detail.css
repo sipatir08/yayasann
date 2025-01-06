@@ -1,0 +1,74 @@
+/* detail.css */
+.donation-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.donation-title {
+  font-size: 2.5em;
+  text-align: center;
+  color: #2c3e50;
+}
+
+.donation-subtitle {
+  font-size: 1.2em;
+  text-align: center;
+  color: #7f8c8d;
+  margin-bottom: 20px;
+}
+
+.donation-list {
+  list-style-type: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.donation-item {
+  display: flex;
+  justify-content: center;
+}
+
+.donation-card {
+  background-color: #ecf0f1;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 100%;
+  max-width: 320px;
+  margin: 0 auto;
+}
+
+.donation-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.donation-donor {
+  font-size: 1.5em;
+  color: #34495e;
+  margin-bottom: 10px;
+}
+
+.donation-detail {
+  font-size: 1em;
+  margin-top: 10px;
+}
+
+.donation-description {
+  font-size: 1em;
+  margin-top: 10px;
+  color: #95a5a6;
+}
+
+.loading,
+.error,
+.empty {
+  text-align: center;
+  font-size: 1.5em;
+  color: #e74c3c;
+  margin-top: 50px;
+}
