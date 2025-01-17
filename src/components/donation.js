@@ -8,6 +8,7 @@ const Donation = () => {
   const [amount, setAmount] = useState("");
   const [item, setItem] = useState("");
   const [category, setCategory] = useState("");
+  const [paymentProof, setPaymentProof] = useState(null); // Untuk bukti pembayaran
 
   // Fungsi cek login
   const isLoggedIn = () => !!localStorage.getItem("token");
@@ -29,7 +30,8 @@ const Donation = () => {
       !name ||
       !category ||
       (donationType === "uang" && !amount) ||
-      (donationType === "barang" && !item)
+      (donationType === "barang" && !item) ||
+      !paymentProof // Pastikan bukti pembayaran ada
     ) {
       Swal.fire({
         icon: "error",
@@ -40,32 +42,32 @@ const Donation = () => {
       return;
     }
 
-    // Data yang akan dikirim ke backend
-    const donationData = {
-      nama_donatur: name,
-      kategori: category,
-      jumlah: parseInt(amount), // Konversi jumlah ke angka
-      type: donationType,
-    };
+    // Membuat objek FormData untuk mengirim data dan file
+    const formData = new FormData();
+    formData.append("nama_donatur", name);
+    formData.append("kategori", category);
+    formData.append("jumlah", amount);
+    formData.append("type", donationType);
+    formData.append("paymentProof", paymentProof); // Menambahkan bukti pembayaran
 
-    console.log(donationData);
-    console.log(localStorage.getItem("token"));
-    const token = localStorage.getItem("token"); // Ambil token yang sudah disimpan di local storage
-    
+    // Jika tipe donasi adalah barang, tambahkan item
+    if (donationType === "barang") {
+      formData.append("item", item);
+    }
 
+    // Kirim data ke backend
+    const token = localStorage.getItem("token");
     try {
-      const response = await fetch('http://localhost:8080/donations', {
-        method: 'POST',
+      const response = await fetch("http://localhost:8080/donations", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
+          // contentType: "application/json",
+          "Authorization": `Bearer ${token}`,
         },
-        body: JSON.stringify(donationData),
+        body: formData,
       });
 
       const data = await response.json();
-      console.log(data);
-      
 
       if (response.ok) {
         Swal.fire({
@@ -77,7 +79,7 @@ const Donation = () => {
         Swal.fire({
           icon: "error",
           title: "Error",
-          text: data.message || "Terjadi kesalahan saat mengirim donasi.",
+          text: data.error || "Terjadi kesalahan saat mengirim donasi.",
           confirmButtonText: "OK",
         });
       }
@@ -186,6 +188,16 @@ const Donation = () => {
             <option value="Health">Health</option>
             <option value="FoodAssistance">Food Assistance</option>
           </select>
+        </div>
+
+        {/* Input Bukti Pembayaran */}
+        <div className="form-group">
+          <label htmlFor="paymentProof">Payment Proof</label>
+          <input
+            type="file"
+            id="paymentProof"
+            onChange={(e) => setPaymentProof(e.target.files[0])}
+          />
         </div>
 
         {/* Button Submit */}

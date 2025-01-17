@@ -1,13 +1,14 @@
 import React, { useState } from "react";
-import { axiosInstance } from '../services/donationService'; // Menggunakan named import
+import { axiosInstance } from "../services/donationService"; // Menggunakan named import
 
 const AddDonation = () => {
   const [donation, setDonation] = useState({
     nama_donatur: "",
     kategori: "",
     jumlah: "",
-    type: "", 
+    type: "",
   });
+  const [paymentProof, setPaymentProof] = useState(null); // State untuk file
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
 
@@ -15,18 +16,22 @@ const AddDonation = () => {
     setDonation({ ...donation, [e.target.name]: e.target.value });
   };
 
+  const handleFileChange = (e) => {
+    setPaymentProof(e.target.files[0]); // Menyimpan file ke state
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setErrorMessage("");
     setLoading(true);
-  
+
     // Validasi input sebelum dikirim ke backend
     if (!donation.nama_donatur || !donation.kategori || !donation.jumlah) {
       setErrorMessage("Semua kolom wajib diisi!");
       setLoading(false);
       return;
     }
-  
+
     // Pastikan jumlah adalah integer sebelum dikirim
     const jumlahInt = parseInt(donation.jumlah, 10);
     if (isNaN(jumlahInt)) {
@@ -34,24 +39,41 @@ const AddDonation = () => {
       setLoading(false);
       return;
     }
-  
-    // Kirim data dengan jumlah yang sudah dikonversi ke integer
-    const donationData = { ...donation, jumlah: jumlahInt };
-    console.log("Donation data:", donationData);  // Cek data yang dikirim
-  
+
+    if (!paymentProof) {
+      setErrorMessage("Bukti pembayaran wajib dilampirkan!");
+      setLoading(false);
+      return;
+    }
+
+    // Kirim data dengan FormData untuk mencakup file
+    const formData = new FormData();
+    formData.append("nama_donatur", donation.nama_donatur);
+    formData.append("kategori", donation.kategori);
+    formData.append("jumlah", jumlahInt);
+    formData.append("type", donation.type);
+    formData.append("paymentProof", paymentProof);
+
     try {
-      const response = await axiosInstance.post("/donations", donationData); // Menggunakan axiosInstance
-      console.log(response);  // Tambahkan log untuk melihat respons
+      const response = await axiosInstance.post("/donations", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response); // Tambahkan log untuk melihat respons
       alert("Donasi berhasil ditambahkan!");
       setDonation({ nama_donatur: "", kategori: "", jumlah: "", type: "" });
+      setPaymentProof(null); // Reset file
     } catch (error) {
       console.error("Error adding donation:", error);
-      setErrorMessage(error.response?.data?.error || "Terjadi kesalahan saat menambahkan donasi.");
+      setErrorMessage(
+        error.response?.data?.error || "Terjadi kesalahan saat menambahkan donasi."
+      );
     } finally {
       setLoading(false);
     }
   };
-  
+
   return (
     <div>
       <h1>Tambah Donasi</h1>
@@ -83,10 +105,12 @@ const AddDonation = () => {
             type="number"
             name="jumlah"
             value={donation.jumlah}
-            onChange={(e) => setDonation({
-              ...donation,
-              jumlah: e.target.value,
-            })}
+            onChange={(e) =>
+              setDonation({
+                ...donation,
+                jumlah: e.target.value,
+              })
+            }
             required
           />
         </div>
@@ -96,6 +120,17 @@ const AddDonation = () => {
             <option value="uang">Uang</option>
             <option value="barang">Barang</option>
           </select>
+        </div>
+        <div>
+          <label htmlFor="paymentProof">Upload Bukti Pembayaran</label>
+          <input
+            type="file"
+            id="paymentProof"
+            name="paymentProof"
+            accept="image/*,application/pdf"
+            onChange={handleFileChange}
+            required
+          />
         </div>
         <button type="submit" disabled={loading}>
           {loading ? "Menambahkan..." : "Tambah"}
