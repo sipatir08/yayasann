@@ -7,7 +7,7 @@ const Education = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8080/category/education")
+    fetch("https://yayasan-three.vercel.app/donations/category/education")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);

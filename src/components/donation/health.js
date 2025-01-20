@@ -7,7 +7,7 @@ const Health = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch("http://localhost:8080/category/Health")
+    fetch("https://yayasan-three.vercel.app/donations/category/Health")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
