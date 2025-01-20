@@ -111,7 +111,7 @@
             const id = row.getElementsByTagName('td')[0].innerText;
 
             if (confirm(`Apakah Anda yakin ingin menghapus user dengan ID ${id}?`)) {
-                fetch(`http://localhost:8080/users/${id}`, {
+                fetch(`https://yayasan-three.vercel.app/users/${id}`, {
                     method: 'DELETE',
                 })
                 .then(response => {
