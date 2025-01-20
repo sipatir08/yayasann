@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8080'; // Ganti dengan URL backend Anda
+const API_URL = 'https://yayasan-three.vercel.app'; // Ganti dengan URL backend Anda
 
 // Fungsi untuk mendapatkan token
 const getToken = () => {

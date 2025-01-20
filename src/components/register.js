@@ -24,7 +24,7 @@ const Register = () => {
     const values = { email, name, password };
 
     try {
-      const response = await axios.post("http://localhost:8080/regis", values);
+      const response = await axios.post("https://yayasan-three.vercel.app/regis", values);
       navigate("/login");
     } catch (error) {
       console.error(error.response || error.message);

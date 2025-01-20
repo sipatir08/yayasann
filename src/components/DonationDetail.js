@@ -8,7 +8,7 @@ const DonationDetail = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetch(`http://localhost:8080/category/${id}`)
+    fetch(`https://yayasan-three.vercel.app/category/${id}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error(`Error: ${response.statusText}`);

@@ -58,7 +58,7 @@ const Donation = () => {
     // Kirim data ke backend
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch("http://localhost:8080/donations", {
+      const response = await fetch("https://yayasan-three.vercel.app/donations", {
         method: "POST",
         headers: {
           // contentType: "application/json",
