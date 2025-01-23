@@ -26,7 +26,7 @@ const Login = () => {
         localStorage.setItem("token", data.token);
         data.user.role === "admin"
           ? window.location.href =
-              "https://sipatir08.github.io/dashboard"
+              "http://127.0.0.1:5502/src/components/Dashboard/Dashboardadmin.html"
           : navigate("/");
       } else {
         setError(data.message || "Email atau password salah");
