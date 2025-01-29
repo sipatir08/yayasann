@@ -21,6 +21,9 @@ const Donation = () => {
         title: "Login Required",
         text: "Anda harus login terlebih dahulu untuk melakukan donasi.",
         confirmButtonText: "OK",
+      }).then(() => {
+        // Redirect ke halaman login setelah klik OK
+        window.location.href = "/login"; // Ganti dengan rute halaman login Anda
       });
       return; // Jangan lanjutkan jika belum login
     }
@@ -61,7 +64,6 @@ const Donation = () => {
       const response = await fetch("https://yayasan-three.vercel.app/donations", {
         method: "POST",
         headers: {
-          // contentType: "application/json",
           "Authorization": `Bearer ${token}`,
         },
         body: formData,
