@@ -8,7 +8,7 @@ const FoodAssistance = () => {
 
   useEffect(() => {
     // Melakukan fetch data dari API
-    fetch("https://yayasan-three.vercel.app/donationscategory/FoodAssistance")
+    fetch("https://yayasan-three.vercel.app/donations/category/FoodAssistance")
       .then((response) => {
         if (!response.ok) {
           throw new Error(`HTTP error! Status: ${response.status}`);
