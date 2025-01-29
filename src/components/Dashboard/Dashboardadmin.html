@@ -15,39 +15,64 @@
     <!-- Sidebar -->
     <div class="flex h-screen">
       <aside class="bg-yellow-500 w-64 p-6">
-          <h1 class="text-white text-3xl font-bold mb-8">Admin Dashboard</h1>
-          <nav>
-              <ul>
-                  <li class="mb-4">
-                      <a href="Dashboardadmin.html" class="block text-white hover:bg-yellow-400 px-4 py-2 rounded-md">
-                          Dashboard
-                      </a>
-                  </li>
-                  <li class="mb-4">
-                      <a href="Kelolauser.html" class="block text-white hover:bg-yellow-400 px-4 py-2 rounded-md">
-                          Kelola User
-                      </a>
-                  </li>
-                  <li class="mb-4">
-                      <a href="Keloladonasi.html" class="block text-white hover:bg-yellow-400 px-4 py-2 rounded-md">
-                          Kelola Donasi
-                      </a>
-                  </li>
-                  <li class="mt-8">
-                    <button
-                      id="logout-btn"
-                      class="block w-full bg-red-500 text-white hover:bg-red-600 px-4 py-2 rounded-md text-center"
-                    >
-                      Logout
-                    </button>
-                  </li>
-              </ul>
-          </nav>
+        <h1 class="text-white text-3xl font-bold mb-8">Admin Dashboard</h1>
+        <nav>
+          <ul>
+            <li class="mb-4">
+              <a
+                href="Dashboardadmin.html"
+                class="block text-white hover:bg-yellow-400 px-4 py-2 rounded-md"
+              >
+                Dashboard
+              </a>
+            </li>
+            <li class="mb-4">
+              <a
+                href="Kelolauser.html"
+                class="block text-white hover:bg-yellow-400 px-4 py-2 rounded-md"
+              >
+                Kelola User
+              </a>
+            </li>
+            <li class="mb-4">
+              <a
+                href="Keloladonasi.html"
+                class="block text-white hover:bg-yellow-400 px-4 py-2 rounded-md"
+              >
+                Kelola Donasi
+              </a>
+            </li>
+            <li class="mt-8">
+              <button
+                id="logout-btn"
+                class="block w-full bg-red-500 text-white hover:bg-red-600 px-4 py-2 rounded-md text-center"
+              >
+                Logout
+              </button>
+            </li>
+          </ul>
+        </nav>
       </aside>
+
       <!-- Main Content -->
       <main class="flex-1 p-6">
+        <!-- Ringkasan Donasi -->
+        <section id="summary" class="mt-6">
+          <h2 class="text-2xl font-bold mb-4">Ringkasan Donasi</h2>
+          <div class="bg-white p-6 rounded shadow">
+            <p class="text-lg font-semibold">
+              Total Jumlah Donasi: <span id="total-donation">Rp 0</span>
+            </p>
+          </div>
+        </section>
 
-        <!-- Products Section -->
+        <!-- Grafik Donasi -->
+        <section id="chart-section" class="mt-6">
+          <h2 class="text-2xl font-bold mb-4">Grafik Donasi Berdasarkan Kategori</h2>
+          <canvas id="donation-chart" class="bg-white rounded shadow"></canvas>
+        </section>
+
+        <!-- Daftar Donasi -->
         <section id="products" class="mt-6">
           <h2 class="text-3xl font-bold mb-6">DASHBOARD</h2>
           <table class="w-full bg-white rounded shadow" id="donation-table">
@@ -67,22 +92,19 @@
       </main>
     </div>
 
-    <!-- Fetch Data Script -->
+    <!-- Script -->
     <script>
       document.getElementById("logout-btn").addEventListener("click", () => {
-        // Konfirmasi logout
         if (confirm("Apakah Anda yakin ingin logout?")) {
-          // Hapus token atau sesi pengguna
-          localStorage.removeItem("token"); // Jika menggunakan token
-          sessionStorage.clear(); // Bersihkan sesi jika diperlukan
-  
-          // Redirect ke halaman login
+          localStorage.removeItem("token");
+          sessionStorage.clear();
           window.location.href = "https://yayasann-sipatir08s-projects.vercel.app/login";
         }
       });
+
       document.addEventListener("DOMContentLoaded", () => {
-        const apiUrl = "https://yayasan-three.vercel.app/donations"; // API Endpoint
-      
+        const apiUrl = "https://yayasan-three.vercel.app/donations";
+
         fetch(apiUrl)
           .then((response) => {
             if (!response.ok) {
@@ -92,14 +114,25 @@
           })
           .then((data) => {
             const tableBody = document.querySelector("#donation-table tbody");
-      
+            let totalDonasi = 0;
+            const kategoriDonasi = {};
+
             data.forEach((donation, index) => {
-              const row = tableBody.insertRow();
               const jumlahFormatted =
                 donation.type === "barang"
-                  ? donation.jumlah // Tidak menggunakan Rp untuk barang
-                  : `Rp ${donation.jumlah.toLocaleString()}`; // Format mata uang untuk uang
-      
+                  ? donation.jumlah
+                  : `Rp ${donation.jumlah.toLocaleString()}`;
+
+              if (donation.type !== "barang") {
+                totalDonasi += donation.jumlah;
+              }
+
+              if (!kategoriDonasi[donation.kategori]) {
+                kategoriDonasi[donation.kategori] = 0;
+              }
+              kategoriDonasi[donation.kategori] += donation.jumlah;
+
+              const row = tableBody.insertRow();
               row.innerHTML = `
                 <td class="p-4 text-center">${index + 1}</td>
                 <td class="p-4">${donation.nama_donatur}</td>
@@ -109,15 +142,37 @@
                 <td class="p-4">${new Date(donation.tanggal).toLocaleString()}</td>
               `;
             });
+
+            document.getElementById("total-donation").textContent = `Rp ${totalDonasi.toLocaleString()}`;
+
+            const ctx = document.getElementById("donation-chart").getContext("2d");
+            new Chart(ctx, {
+              type: "bar",
+              data: {
+                labels: Object.keys(kategoriDonasi),
+                datasets: [
+                  {
+                    label: "Total Donasi (Rp)",
+                    data: Object.values(kategoriDonasi),
+                    backgroundColor: "rgba(255, 206, 86, 0.6)",
+                    borderColor: "rgba(255, 206, 86, 1)",
+                    borderWidth: 1,
+                  },
+                ],
+              },
+              options: {
+                scales: {
+                  y: {
+                    beginAtZero: true,
+                  },
+                },
+              },
+            });
           })
           .catch((error) => {
-            console.error(
-              "There has been a problem with your fetch operation:",
-              error
-            );
+            console.error("There has been a problem with your fetch operation:", error);
           });
-      });      
-      </script>
-      
+      });
+    </script>
   </body>
 </html>

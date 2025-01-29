@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "../assets/register.css";
 import axios from "axios";
-import logo from '../assets/images/logoril.png'; // Path logo Anda
+import logo from "../assets/images/logoril.png"; // Path logo Anda
+import Swal from "sweetalert2"; // Tambahkan ini
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -15,6 +16,8 @@ const Register = () => {
   const handleRegister = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+    setError(""); // Reset error state
+
     if (!email || !password) {
       setError("Email dan password harus diisi");
       setIsLoading(false);
@@ -24,11 +27,30 @@ const Register = () => {
     const values = { email, name, password };
 
     try {
-      const response = await axios.post("https://yayasan-three.vercel.app/regis", values);
-      navigate("/login");
+      const response = await axios.post(
+        "http://localhost:8080/regis", // URL register dengan protokol lengkap https://yayasan-three.vercel.app/regis
+        values
+      );
+
+      if (response.status === 200 || response.status === 201) {
+        // SweetAlert setelah registrasi berhasil
+        Swal.fire({
+          icon: "success",
+          title: "Registrasi Berhasil!",
+          text: "Silakan verifikasi sebelum login untuk melanjutkan.",
+          confirmButtonText: "OK",
+        }).then(() => {
+          navigate("/login"); // Redirect ke login setelah klik OK
+        });
+      } else {
+        setError("Terjadi kesalahan saat registrasi. Silakan coba lagi.");
+      }
     } catch (error) {
       console.error(error.response || error.message);
-      setError("Terjadi kesalahan. Coba lagi.");
+      setError(
+        error.response?.data?.message || "Terjadi kesalahan. Silakan coba lagi."
+      );
+    } finally {
       setIsLoading(false);
     }
   };
@@ -36,7 +58,7 @@ const Register = () => {
   return (
     <div className="register-container">
       <div className="register-card">
-      <img src={logo} alt="Logo" className="logo" />
+        <img src={logo} alt="Logo" className="logo" />
         <h2>Daftar Akun Baru</h2>
         <p className="tagline">your help means a lot!</p>
         <form onSubmit={handleRegister} className="register-form">
@@ -79,7 +101,13 @@ const Register = () => {
           </button>
         </form>
         <p className="login-link">
-          Sudah punya akun? <span onClick={() => navigate("/login")} className="link-text">Login</span>
+          Sudah punya akun?{" "}
+          <span
+            onClick={() => navigate("/login")}
+            className="link-text"
+          >
+            Login
+          </span>
         </p>
       </div>
     </div>
