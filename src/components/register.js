@@ -18,8 +18,8 @@ const Register = () => {
     setIsLoading(true);
     setError(""); // Reset error state
 
-    if (!email || !password) {
-      setError("Email dan password harus diisi");
+    if (!email || !password || !name) {
+      setError("Email, Nama, dan Password harus diisi");
       setIsLoading(false);
       return;
     }
@@ -28,9 +28,9 @@ const Register = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/regis", // URL register dengan protokol lengkap https://yayasan-three.vercel.app/regis
+        "https://yayasan-three.vercel.app//regis", // Perbaiki URL ini
         values
-      );
+      );      
 
       if (response.status === 200 || response.status === 201) {
         // SweetAlert setelah registrasi berhasil
@@ -46,7 +46,7 @@ const Register = () => {
         setError("Terjadi kesalahan saat registrasi. Silakan coba lagi.");
       }
     } catch (error) {
-      console.error(error.response || error.message);
+      console.error("Error during registration:", error.response || error.message);
       setError(
         error.response?.data?.message || "Terjadi kesalahan. Silakan coba lagi."
       );
